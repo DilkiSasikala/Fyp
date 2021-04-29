@@ -1,44 +1,202 @@
 <!DOCTYPE html>
 <html >
 <head>
-  <meta charset="UTF-8">
-  <title>Click Fraud detection</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <title>Click Fraud detection</title>
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+      <!-- style css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+      <!-- fevicon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.mCustomScrollbar.min.css') }}">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
 
 </head>
-<body>
-  <div>
-      <!-- Navbar -->
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-          <div class="container">
+<body class="main-layout">
+<div class="loader_bg">
+         <div class="loader"><img src="{{ url_for('static', filename='images/loading.gif') }}" alt="#" /></div>
+      </div>
+      <!-- end loader -->
+      <!-- header -->
+      <header>
+         <!-- header inner -->
+         <div  class="head_top">
+            <div class="header">
+               <div class="container-fluid">
+                  <div class="row">
+                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                           <span class="navbar-toggler-icon"></span>
+                           </button>
+                           <div class="collapse navbar-collapse" id="navbarsExample04">
+                              <ul class="navbar-nav mr-auto">
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="#"> Home  </a>
+                                 </li>
+                              </ul>
+                           </div>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- end header inner -->
+            <!-- end header -->
+            <!-- banner -->
+            <section class="banner_main">
+               <div class="container-fluid">
+                  <div class="row d_flex">
+                     <div class="col-md-6">
+                        <div class="text-bg">
+                           <h1>Digital Advertisement Click Fraud Detection</h1>
+                           <p>This application is a prototype for the click fraud detection of digital advertisements.</p>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="text-img">
+                           <figure><img src="{{ url_for('static', filename='images/box_img.png') }}" alt="#"/></figure>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+         </div>
+      </header>
+      <!-- end banner -->
+      <!-- business -->
+      <div class="business">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <span>User Manual</span>
+                     <h2>Please read the user mannual on how to detect click fraud with this application</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-10 offset-md-1">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="business_box ">
+                           <figure><img src="{{ url_for('static', filename='images/business_img.jpg') }}" alt="#"/></figure>
+                           <p>This applcation takes a .csv file as an input. This file must contain the click data of advertisements. The features that should be included in the file are ip, app, device, os, channel, hour and day. Once the file is uploaded the prediction process will initiate. <br>
+                            **Failing to input a file that does not hold the similar features may result in a failed prediction</p>
+                           <ul>
+                            <li>
+                              IP : Ip addresses of the clicks are given 
+                            </li>
+                            <li>
+                              App : The app id for marketing
+                            </li>
+                            <li>
+                              Device : The device type id of the user mobile phones 
+                            </li>
+                            <li>
+                              OS : The OS version id of the mobile phones
+                            </li>
+                            <li>
+                              Channel : The channel id of different advertisement publishers
+                            </li>
+                            <li>
+                              Hour : Hour which the click took place
+                            </li>
+                            <li>
+                              Day : Day which the click took place
+                            </li>
+                           </ul>
+                           <p>After the prediction process is completed, a csv file will be saved locally containing the prediction results. The results will be shown as 0 and 1 with the relevent click id. In the results column, 0 represents a legitimate click and 1 represents a fraud click.</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end business -->
+    
+      <!-- form -->
+      <div id="contact" class="contact">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <h2>Enter the click data file here</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12 ">
+                  <form class="main_form" action="/predict" method="post" enctype="multipart/form-data">
+                     <div class="row">
+                        <div class="col-md-12 ">
+                           <input class="form_contril" placeholder="Please select the csv file from below." type="text" readonly>
+                        </div>
+                        <div class="col-md-12 ">
+                        <input type="file" name="data_file" placeholder="Enter your CSV file"/>
+                      </div>
+                      <br>
+                      <br>
+                      {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                          {% for message in messages %}
+                              <div class="col-md-12 alert alert-danger" role = "alert">
+                                  {{ message }}
+                              </div>
+                          {% endfor%}
+                        {% endif %}
+                      {% endwith %}
+                        <div class="col-sm-12">
+                           <button class="send_btn">Start Prediction</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end form -->
+      <br>
+      <!--  footer -->
+      <footer>
+         <div class="footer">
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <p>Final year project - Prototype 2021</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+      <!-- Javascript files-->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/plugin.js') }}"></script>
+      <!-- sidebar -->
+      <script src="{{ url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
-            <!-- Brand -->
-            <a class="navbar-brand" href="#" target="_blank">
-              <strong>Click Fraud Detection</strong>
-            </a>
-
-          </div>
-        </nav>
-</div>
-<br><br><br><br><br><br>
-   <div class="container">
-   	<h2>Click fraud detection prototype</h2>
-
-		<div class="card text-center" style="width: 18rem;">
-		  <div class="card-body">
-		    <h6 class="card-title">Please choose a file to coduct predictions</h6>
-		    <br><br>
-		          <form action="/predict" method="post" enctype="multipart/form-data">
-		        	<input type="file" name="data_file" placeholder="Enter your CSV file" required="required" />
-		        	<br><br><br>
-		            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-		        </form>
-		  </div>
-		</div>
-   </div>
-
-
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>
