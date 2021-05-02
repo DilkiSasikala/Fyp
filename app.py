@@ -19,9 +19,8 @@ app.secret_key = "abc"
 UPLOAD_FOLDER = "/Volumes/Transcend/IIT LEVEL 6/prototype-fraud/Application"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = {'csv'}
-# ALLOWED_EXTENSIONS = set(['csv'])
 
-def allowed_file(filename):
+def only_allowed_files(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -45,14 +44,14 @@ def predict():
         flash('No file is detected. Please enter a CSV file!!')
         return redirect('/')  
 
-      if not allowed_file(f.filename):
+      if not only_allowed_files(f.filename):
         flash('Only CSV files are accepted!!') 
         return redirect('/')  
 
     stream = io.StringIO(f.stream.read().decode("UTF8"), newline=None)
-    csv_input = csv.reader(stream)
+    csv_input_file = csv.reader(stream)
 
-    for row in csv_input:
+    for row in csv_input_file:
         print(row)
 
     stream.seek(0)
@@ -67,10 +66,10 @@ def predict():
     # print (column)
     # print (id_value)
 
-    # load the model from disk
-    loaded_model = pickle.load(open('model.pkl', 'rb'))
+    # load the model to the system
+    load_model = pickle.load(open('model.pkl', 'rb'))
     #prediction start
-    prediction = loaded_model.predict(column)
+    prediction = load_model.predict(column)
 
     # print (prediction)
     #save csv
